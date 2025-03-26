@@ -24,6 +24,17 @@ ssh xwang2696@ap2001.chtc.wisc.edu
 ```
 
 # 2. Three concepts in the chtc:
+
+```shell
+
+running node: submit job
+
+staging node: store code and data
+
+running node: run code
+
+```
+
 ## (1). submitting node:
 the /home/xxx directory, users should submit their job here. it looks like this:
 ![submit](https://user-images.githubusercontent.com/17384283/233470445-8de66b0a-0783-4fec-b443-7d690e8fc9c9.png)
@@ -56,198 +67,206 @@ The requirement of GPU parameter is at https://chtc.cs.wisc.edu/uw-research-comp
 After log in to your submitting node, eg: **/home/xwang2696/**, (suppose my id is xwang2696), create a folder named **/occupy/**, and create:
 1. **occupy.sub**, the function of this file is to let the running node run a script (**occupy.sh**) and transfer 3 files(**occupy.py, setup.sh, studio.yaml**).
 
-<details>
+    <details>
 
-<summary>click to see the content</summary>
+    <summary>click to see the content</summary>
 
-```python
-universe = vanilla
-executable = occupy.sh
-output = ./log/$(Cluster).out
-log = ./log/$(Cluster).log
-error = ./log/$(Cluster).err
+    ```python
+    universe = vanilla
+    executable = occupy.sh
+    output = ./log/$(Cluster).out
+    log = ./log/$(Cluster).log
+    error = ./log/$(Cluster).err
 
-transfer_input_files = occupy.py, studio.yaml, setup.sh
-should_transfer_files = YES
-when_to_transfer_output = ON_EXIT
+    transfer_input_files = occupy.py, studio.yaml, setup.sh
+    should_transfer_files = YES
+    when_to_transfer_output = ON_EXIT
 
-Requirements = (Target.HasCHTCStaging == true)
+    Requirements = (Target.HasCHTCStaging == true)
 
-#require_gpus = (DriverVersion >= 11.1)
-request_gpus = 1
+    #require_gpus = (DriverVersion >= 11.1)
+    request_gpus = 1
 
-+WantGPULab = true
-+GPUJobLength = "long"
+    +WantGPULab = true
+    +GPUJobLength = "long"
 
-request_cpus = 1
-request_memory = 16GB
-request_disk = 50GB
+    request_cpus = 1
+    request_memory = 16GB
+    request_disk = 50GB
 
-queue 1
-```
+    queue 1
+    ```
 
-</details>
+    </details>
 
 2. **occupy.sh**, the function is to run the occupy.py. Note that although the standard maximum use time is 7 days, we can use it for one month.(But I suggest you re-apply a new running node every 10 days, because it is illegal)
  
-<details>
+    <details>
 
-<summary>click to see the content</summary>
+    <summary>click to see the content</summary>
 
-```shell
-#!/bin/bash
-# Following the example from http://chtc.cs.wisc.edu/conda-installation.shtml
-# except here we download the installer instead of transferring it
-# Download a specific version of Miniconda instead of latest to improve
-# reproducibility
-export HOME=$PWD
-wget -q https://repo.anaconda.com/miniconda/Miniconda3-py39_4.10.3-Linux-x86_64.sh -O miniconda.sh
-sh miniconda.sh -b -p $HOME/miniconda3
-rm miniconda.sh
-export PATH=$HOME/miniconda3/bin:$PATH
-# Set up conda
-source $HOME/miniconda3/etc/profile.d/conda.sh
-hash -r
-conda config --set always_yes yes --set changeps1 no
+    ```shell
+    #!/bin/bash
+    # Following the example from http://chtc.cs.wisc.edu/conda-installation.shtml
+    # except here we download the installer instead of transferring it
+    # Download a specific version of Miniconda instead of latest to improve
+    # reproducibility
+    export HOME=$PWD
+    wget -q https://repo.anaconda.com/miniconda/Miniconda3-py39_4.10.3-Linux-x86_64.sh -O miniconda.sh
+    sh miniconda.sh -b -p $HOME/miniconda3
+    rm miniconda.sh
+    export PATH=$HOME/miniconda3/bin:$PATH
+    # Set up conda
+    source $HOME/miniconda3/etc/profile.d/conda.sh
+    hash -r
+    conda config --set always_yes yes --set changeps1 no
 
-# Modify these lines to run your desired Python script
-python occupy.py 
+    # Modify these lines to run your desired Python script
+    python occupy.py 
 
-```
+    ```
 
-</details>
+    </details>
 
 
 3. **occupy.py**, the function is to let the running node sleep for one month.
 
-<details>
+    <details>
 
-<summary>click to see the content</summary>
+    <summary>click to see the content</summary>
 
-```python
-import time
-time.sleep(3600000)
+    ```python
+    import time
+    time.sleep(3600000)
 
-```
+    ```
 
-</details>
+    </details>
 
 
 
 4. **setup.sh**, the function is to setup anaconda environment in running node.
 
-<details>
+    <details>
 
-<summary>click to see the content</summary>
-```shell
-source $HOME/miniconda3/etc/profile.d/conda.sh
-find_in_conda_env(){
-    conda env list | grep "${@}" >/dev/null 2>/dev/null
-}
-if find_in_conda_env ".*studio.*" ; then
-   conda activate studio
-else
-        conda env create -f studio.yaml
-        conda activate studio
-fi
-```
+    <summary>click to see the content</summary>
 
+    ```shell
+    source $HOME/miniconda3/etc/profile.d/conda.sh
+    find_in_conda_env(){
+        conda env list | grep "${@}" >/dev/null 2>/dev/null
+    }
+    if find_in_conda_env ".*studio.*" ; then
+    conda activate studio
+    else
+            conda env create -f studio.yaml
+            conda activate studio
+    fi
 
-</details>
+    conda env list
+
+    python <<EOF
+    import torch
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    print('Using device:', device)
+    EOF
+    ```
+
+    </details>
 
 
 5. **studio.yaml**, this is a conda environment I create for myself, you can use your own conda environment instead.
 
-<details>
+    <details>
 
-<summary>click to see the content</summary>
-```shell
-name: studio
-channels:
-  - pytorch
-  - nvidia
-  - defaults
-dependencies:
-  - _libgcc_mutex=0.1=main
-  - _openmp_mutex=5.1=1_gnu
-  - blas=1.0=mkl
-  - bottleneck=1.3.5=py39h7deecbd_0
-  - bzip2=1.0.8=h5eee18b_6
-  - ca-certificates=2024.3.11=h06a4308_0
-  - cudatoolkit=11.1.74=h6bb024c_0
-  - ffmpeg=4.2.2=h20bf706_0
-  - freetype=2.12.1=h4a9f257_0
-  - giflib=5.2.1=h5eee18b_3
-  - gmp=6.2.1=h295c915_3
-  - gnutls=3.6.15=he1e5248_0
-  - intel-openmp=2023.1.0=hdb19cb5_46306
-  - joblib=1.4.2=py39h06a4308_0
-  - jpeg=9b=h024ee3a_2
-  - lame=3.100=h7b6447c_0
-  - lcms2=2.12=h3be6417_0
-  - ld_impl_linux-64=2.38=h1181459_1
-  - libffi=3.4.4=h6a678d5_1
-  - libgcc-ng=11.2.0=h1234567_1
-  - libgfortran-ng=11.2.0=h00389a5_1
-  - libgfortran5=11.2.0=h1234567_1
-  - libgomp=11.2.0=h1234567_1
-  - libidn2=2.3.4=h5eee18b_0
-  - libopus=1.3.1=h7b6447c_0
-  - libpng=1.6.39=h5eee18b_0
-  - libstdcxx-ng=11.2.0=h1234567_1
-  - libtasn1=4.19.0=h5eee18b_0
-  - libtiff=4.1.0=h2733197_1
-  - libunistring=0.9.10=h27cfd23_0
-  - libuv=1.44.2=h5eee18b_0
-  - libvpx=1.7.0=h439df22_0
-  - libwebp=1.2.0=h89dd481_0
-  - lightning-utilities=0.9.0=py39h06a4308_0
-  - lz4-c=1.9.4=h6a678d5_1
-  - mkl=2023.1.0=h213fc3f_46344
-  - mkl-service=2.4.0=py39h5eee18b_1
-  - mkl_fft=1.3.8=py39h5eee18b_0
-  - mkl_random=1.2.4=py39hdb19cb5_0
-  - ncurses=6.4=h6a678d5_0
-  - nettle=3.7.3=hbbd107a_1
-  - ninja=1.10.2=h06a4308_5
-  - ninja-base=1.10.2=hd09550d_5
-  - numexpr=2.8.4=py39hc78ab66_1
-  - numpy=1.20.3=py39h7820934_1
-  - numpy-base=1.20.3=py39h7e635b3_1
-  - openh264=2.1.1=h4ff587b_0
-  - openssl=3.0.14=h5eee18b_0
-  - packaging=23.2=py39h06a4308_0
-  - pandas=1.5.3=py39h417a72b_0
-  - pillow=9.3.0=py39hace64e9_1
-  - pip=24.0=py39h06a4308_0
-  - python=3.9.19=h955ad1f_1
-  - python-dateutil=2.9.0post0=py39h06a4308_2
-  - pytorch=1.9.1=py3.9_cuda11.1_cudnn8.0.5_0
-  - pytz=2024.1=py39h06a4308_0
-  - readline=8.2=h5eee18b_0
-  - scikit-learn=1.1.3=py39h6a678d5_1
-  - scipy=1.9.3=py39hf6e8229_2
-  - setuptools=69.5.1=py39h06a4308_0
-  - six=1.16.0=pyhd3eb1b0_1
-  - sqlite=3.45.3=h5eee18b_0
-  - tbb=2021.8.0=hdb19cb5_0
-  - threadpoolctl=2.2.0=pyh0d69192_0
-  - tk=8.6.14=h39e8969_0
-  - torchmetrics=1.1.2=py39h06a4308_1
-  - torchvision=0.10.1=py39_cu111
-  - tqdm=4.66.4=py39h2f386ee_0
-  - typing_extensions=4.11.0=py39h06a4308_0
-  - tzdata=2024a=h04d1e81_0
-  - wheel=0.43.0=py39h06a4308_0
-  - x264=1!157.20191217=h7b6447c_0
-  - xz=5.4.6=h5eee18b_1
-  - zlib=1.2.13=h5eee18b_1
-  - zstd=1.4.9=haebb681_0
-prefix: /var/lib/condor/execute/slot1/dir_3284020/miniconda3/envs/pytorch
-```
+    <summary>click to see the content</summary>
 
+    ```python
+    name: studio
+    channels:
+    - pytorch
+    - nvidia
+    - defaults
+    dependencies:
+    - _libgcc_mutex=0.1=main
+    - _openmp_mutex=5.1=1_gnu
+    - blas=1.0=mkl
+    - bottleneck=1.3.5=py39h7deecbd_0
+    - bzip2=1.0.8=h5eee18b_6
+    - ca-certificates=2024.3.11=h06a4308_0
+    - cudatoolkit=11.1.74=h6bb024c_0
+    - ffmpeg=4.2.2=h20bf706_0
+    - freetype=2.12.1=h4a9f257_0
+    - giflib=5.2.1=h5eee18b_3
+    - gmp=6.2.1=h295c915_3
+    - gnutls=3.6.15=he1e5248_0
+    - intel-openmp=2023.1.0=hdb19cb5_46306
+    - joblib=1.4.2=py39h06a4308_0
+    - jpeg=9b=h024ee3a_2
+    - lame=3.100=h7b6447c_0
+    - lcms2=2.12=h3be6417_0
+    - ld_impl_linux-64=2.38=h1181459_1
+    - libffi=3.4.4=h6a678d5_1
+    - libgcc-ng=11.2.0=h1234567_1
+    - libgfortran-ng=11.2.0=h00389a5_1
+    - libgfortran5=11.2.0=h1234567_1
+    - libgomp=11.2.0=h1234567_1
+    - libidn2=2.3.4=h5eee18b_0
+    - libopus=1.3.1=h7b6447c_0
+    - libpng=1.6.39=h5eee18b_0
+    - libstdcxx-ng=11.2.0=h1234567_1
+    - libtasn1=4.19.0=h5eee18b_0
+    - libtiff=4.1.0=h2733197_1
+    - libunistring=0.9.10=h27cfd23_0
+    - libuv=1.44.2=h5eee18b_0
+    - libvpx=1.7.0=h439df22_0
+    - libwebp=1.2.0=h89dd481_0
+    - lightning-utilities=0.9.0=py39h06a4308_0
+    - lz4-c=1.9.4=h6a678d5_1
+    - mkl=2023.1.0=h213fc3f_46344
+    - mkl-service=2.4.0=py39h5eee18b_1
+    - mkl_fft=1.3.8=py39h5eee18b_0
+    - mkl_random=1.2.4=py39hdb19cb5_0
+    - ncurses=6.4=h6a678d5_0
+    - nettle=3.7.3=hbbd107a_1
+    - ninja=1.10.2=h06a4308_5
+    - ninja-base=1.10.2=hd09550d_5
+    - numexpr=2.8.4=py39hc78ab66_1
+    - numpy=1.20.3=py39h7820934_1
+    - numpy-base=1.20.3=py39h7e635b3_1
+    - openh264=2.1.1=h4ff587b_0
+    - openssl=3.0.14=h5eee18b_0
+    - packaging=23.2=py39h06a4308_0
+    - pandas=1.5.3=py39h417a72b_0
+    - pillow=9.3.0=py39hace64e9_1
+    - pip=24.0=py39h06a4308_0
+    - python=3.9.19=h955ad1f_1
+    - python-dateutil=2.9.0post0=py39h06a4308_2
+    - pytorch=1.9.1=py3.9_cuda11.1_cudnn8.0.5_0
+    - pytz=2024.1=py39h06a4308_0
+    - readline=8.2=h5eee18b_0
+    - scikit-learn=1.1.3=py39h6a678d5_1
+    - scipy=1.9.3=py39hf6e8229_2
+    - setuptools=69.5.1=py39h06a4308_0
+    - six=1.16.0=pyhd3eb1b0_1
+    - sqlite=3.45.3=h5eee18b_0
+    - tbb=2021.8.0=hdb19cb5_0
+    - threadpoolctl=2.2.0=pyh0d69192_0
+    - tk=8.6.14=h39e8969_0
+    - torchmetrics=1.1.2=py39h06a4308_1
+    - torchvision=0.10.1=py39_cu111
+    - tqdm=4.66.4=py39h2f386ee_0
+    - typing_extensions=4.11.0=py39h06a4308_0
+    - tzdata=2024a=h04d1e81_0
+    - wheel=0.43.0=py39h06a4308_0
+    - x264=1!157.20191217=h7b6447c_0
+    - xz=5.4.6=h5eee18b_1
+    - zlib=1.2.13=h5eee18b_1
+    - zstd=1.4.9=haebb681_0
+    prefix: /var/lib/condor/execute/slot1/dir_3284020/miniconda3/envs/pytorch
+    ```
 
-</details>
+    </details>
 
 
 ## (3). How to submit a job and require a running machine
@@ -307,7 +326,8 @@ python code.py
 to run your code!
 
 # 4. How to run your code and debug: general idea
-First, I find that we **can only transfer files between staging node and running node**
+First, I find that we **can only transfer files between staging and running node, but can't transfer files bwtween submitting and running node**.
+
 you can transfer your data and code by:
 
 ```shell
@@ -331,8 +351,8 @@ But I suggest you write code in staging node **/staging/xwang2696/**, then uploa
 
 <summary>click to see the content</summary>
 
-
 ```shell
+
 # submit a job
 condor_submit xxx.sub
 
@@ -356,6 +376,7 @@ quota -vs
 
 # count your file numbers in this folder
 ls -lR| grep "^-" | wc -l
+
 ```
 
 </details>

@@ -1,5 +1,6 @@
 <html>
-<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">	
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">	
 	<title>Xiaoyu Wang</title>
 	<link rel="stylesheet" href="./index_files/jemdoc.css" type="text/css">
 	<script async="" src="http://www.google-analytics.com/analytics.js"></script>
@@ -29,14 +30,67 @@
 	.bold {font-weight: bold;}
 	.italic {font-style: italic;}
 	.bulletpoints {line-height: 1.5em;}
-	.row {box-sizing: border-box;}
-	.row-media {display: block; float: left; width: 180px; height: 90px; background-position: center; background-size: contain; background-repeat: no-repeat; border-radius: 6px; border: 1px solid #def;}
-	.row-text {display: block; float: left; margin-left: 16px; line-height: 1.5em; max-width: 662px;}
-	.row-text span {line-height: inherit;}
-	.clearfix {content: ""; clear: both; display: table;}
-	.publication {margin-bottom: 32px; margin-left: 16px;}
-	.press {width: 100px; height: 80px; border: 1px solid #def; margin-right: 12px; background-size: cover;}  
-	.img-contain {background-size: contain !important;}
+
+	#layout-content {
+		max-width: 1200px;
+		margin-left: auto;
+		margin-right: auto;
+		padding-left: 24px;
+		padding-right: 24px;
+		box-sizing: border-box;
+	}
+
+	#layout-content > h2,
+	#layout-content > h3,
+	#layout-content > p,
+	#layout-content > ul,
+	#layout-content > .publication {
+		max-width: none;
+		box-sizing: border-box;
+	}
+
+	.row {
+		box-sizing: border-box;
+		width: 100%;
+	}
+
+	.row-media,
+	.press {
+		display: none !important;
+	}
+
+	.row-text {
+		display: block;
+		float: none;
+		margin-left: 0;
+		line-height: 1.5em;
+		max-width: none;
+		width: 100%;
+		box-sizing: border-box;
+	}
+
+	.row-text span {
+		line-height: inherit;
+	}
+
+	.clearfix {
+		content: "";
+		clear: both;
+		display: table;
+		width: 100%;
+	}
+
+	.publication {
+		margin-bottom: 32px;
+		margin-left: 16px;
+		margin-right: 16px;
+		width: calc(100% - 32px);
+	}
+
+	.img-contain {
+		background-size: contain !important;
+	}
+
 	.footer {background-color: #345; width: 100%}
 	.footer-content {color: #fff; font-size: 10px; padding: 6px 0; max-width: 900px; margin: auto;}
 
@@ -48,10 +102,19 @@
 	}
 
 	@media only screen and (max-width: 900px) {
-		.publication {margin-bottom: 46px;}
-		.publication .row-media {width: 260px; height: 130px; margin: auto; margin-bottom: 12px; display: block;}
-		.publication .row-text {display: block; width: 100%; margin-left: 0;}
-		.press {display: block;}
+		.publication {
+			margin-bottom: 46px;
+			margin-left: 0;
+			margin-right: 0;
+			width: 100%;
+		}
+		.publication .row-text {
+			display: block;
+			float: none;
+			width: 100%;
+			margin-left: 0;
+			max-width: none;
+		}
 	}
 
 	html {
@@ -85,13 +148,11 @@
 		scroll-margin-top: 80px;
 	}
 
-
 	h1, h2, h3 {
-	color: rgb(0, 0, 0);
+		color: rgb(0, 0, 0);
 	}
     </style>
 </head>
-
 
 <body>
 <div class="topnav">
@@ -100,13 +161,13 @@
 	<a href="#experience">Experience</a>
 	<a href="#publications">Publications</a>
 	<a href="#teaching">Teaching</a>
-	<!-- <a href="#Grants">Grants</a> -->
 </div>
 
 <div id="layout-content" style="margin-top:25px">
 
-<table cellpadding="11px">
+<table cellpadding="11px" width="100%">
 	<tbody>
+		<tr>
 			<td width="720px">
 				<h1 style="border-bottom:none; margin-bottom:6px; color:black;">
 					Xiaoyu Wang
@@ -117,7 +178,7 @@
 				Ph.D. Student    
 				<p>
 					University of Wisconsin-Madison<br>
-					Email:  <a href="xwang2696@wisc.edu">xwang2696@wisc.edu</a><br>
+					Email: <a href="mailto:xwang2696@wisc.edu">xwang2696@wisc.edu</a><br>
 					<hr>
 					<a href="https://scholar.google.com/citations?user=Emze7GAAAAAJ&hl=en&oi=ao">Google Scholar</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<a href="./files/resume.pdf">Resume(2025.3)</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -126,172 +187,166 @@
 					<hr>
                 </p>
 			</td>
-			<td valign="middle">
+			<td valign="middle" align="right">
 				<img src="./files/head2.jpeg" border="0" width="200"><br><br>
 			</td>
+		</tr>
 	</tbody>
 </table>
 
-
 <h2 id="about">About Me</h2>
 
-	<p style="text-align:justify;">I am a Ph.D. student (2023.1-) at the <a href="https://bse.wisc.edu/">Biological System Engineering</a> of 
-		<a href="https://www.wisc.edu/">University of Wisconsin-Madison</a>. 
-		I received my Bachelor's degree (2017-2021) at the <a href="http://www.xjtu.edu.cn/"> Xi'an Jiaotong University</a>.
-	</p>
-	<p style="text-align:justify;">My current research interests include remote sensing, machine learning, and ai4science. 
-	</p>
+<p style="text-align:justify;">I am a Ph.D. student (2023.1-) at the <a href="https://bse.wisc.edu/">Biological System Engineering</a> of 
+	<a href="https://www.wisc.edu/">University of Wisconsin-Madison</a>. 
+	I received my Bachelor's degree (2017-2021) at the <a href="http://www.xjtu.edu.cn/"> Xi'an Jiaotong University</a>.
+</p>
 
-<h2 id="education"> Education</h2>
-    <p> &nbsp; &nbsp; Ph.D <a href="https://www.wisc.edu/"> University of Wisconsin-Madison</a>, Biological System Engineering, 2023.1 ~ </p>
-		<p style="font-size:0.8em; color:#555; margin-top:-10px; margin-left:2.5em;">
-		Minor in Computer Science<br>
-		Courses: 533(Image Processing); 760(Machine Learning); 759(High Performance Computing for Applications in Engineering)
-		</p>
-	
-	<p> &nbsp; &nbsp; B.S. <a href="http://www.xjtu.edu.cn/">Xi'an Jiaotong University</a>, Computer Science and Technology, 2017 ~ 2021</p>
+<p style="text-align:justify;">My current research interests include remote sensing, machine learning, and ai4science.</p>
 
-<h2 id="experience"> Experience</h2>
-	<p> &nbsp; &nbsp; <a href="https://www.microsoft.com/en-us/research/lab/microsoft-research-asia/">Microsoft Research Asia</a>,  <a href="https://www.microsoft.com/en-us/research/group/media-computing-group/">Media Computing Group</a>, 2021.4 ~ 2022.4, supervised by <a href="https://www.microsoft.com/en-us/research/people/xiakon/">Xiangyu Kong</a> and <a href="https://www.microsoft.com/en-us/research/people/xipe/">Xiulian Peng</a>
-    <br><font size=3><i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Intership, research on audio-visual speech separation</i></font> <a class="btn btn-red" href="https://arxiv.org/pdf/2207.01197.pdf">project</a> </br></p> 
-    
-    <p> &nbsp; &nbsp; <a href="https://www.sensetime.com/cn"> Sensetime</a> , Autonomous driving Group, 2020.9 ~ 2021.3, supervised by  <a href="https://scholar.google.com/citations?user=xB3V4xIAAAAJ&hl=zh-CN">Guohang Yan</a> and <a href="https://superkoma.github.io/">Tao Ma</a>
-    <br><font size=3><i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Intership, working on autonomous driving (sensor calibration)</i></font> </br></p>
-    
-    <p> &nbsp; &nbsp; <a href="https://www.ntu.edu.sg/"> Nanyang Technological University</a> , 2020.9 ~ 2021.3, supervised by <a href="https://www.linkedin.com/in/tao-bai-00698b174/?originalSubdomain=sg">Tao Bai</a> and <a href="https://www.linkedin.com/in/wangjinjun/">Jun Zhao</a>
-    <br><font size=3><i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Intership, research on federated learning and adversarial learning</i></font>  <a class="btn btn-red" href="https://link.springer.com/chapter/10.1007/978-3-030-89137-4_9">project</a> </br></p>
+<h2 id="education">Education</h2>
 
-	<p> &nbsp; &nbsp; <a href="http://www.innno.net/#/"> INNNO</a> , 2019.9 ~ 2020.2
-		<br><font size=3><i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Intership, working on land cover change detection (semantic segmentation) </i></font> <a class="btn btn-red" href="https://github.com/wxystudio/change-detection">project</a> </br></p> 
-    
-    <p> &nbsp; &nbsp; <a href="http://www.xjtu.edu.cn/">Xi'an Jiaotong University</a> , 2018 ~ 2020, supervised by <a href="https://scholar.google.com/citations?user=BST50KwAAAAJ&hl=zh-CN">Jinsong Han</a> and <a href="https://scholar.google.com/citations?user=Dk7JgNcAAAAJ&hl=zh-CN">Jinjun Wang</a>
-    <br><font size=3><i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Research Assistant, research on GAN, federated learning and privacy <a class="btn btn-red" href="https://arxiv.org/abs/1911.08128">project 1</a> <a class="btn btn-red" href="./files/pubs/usenix.pdf">project 2</a> </i></font> </br></p>
+<p>&nbsp; &nbsp; Ph.D <a href="https://www.wisc.edu/"> University of Wisconsin-Madison</a>, Biological System Engineering, 2023.1 ~ </p>
+<p style="font-size:0.8em; color:#555; margin-top:-10px; margin-left:2.5em;">
+	Minor in Computer Science<br>
+	Courses: 533(Image Processing); 760(Machine Learning); 759(High Performance Computing for Applications in Engineering)
+</p>
+
+<p>&nbsp; &nbsp; B.S. <a href="http://www.xjtu.edu.cn/">Xi'an Jiaotong University</a>, Computer Science and Technology, 2017 ~ 2021</p>
+
+<h2 id="experience">Experience</h2>
+
+<p>&nbsp; &nbsp; <a href="https://www.microsoft.com/en-us/research/lab/microsoft-research-asia/">Microsoft Research Asia</a>, <a href="https://www.microsoft.com/en-us/research/group/media-computing-group/">Media Computing Group</a>, 2021.4 ~ 2022.4, supervised by <a href="https://www.microsoft.com/en-us/research/people/xiakon/">Xiangyu Kong</a> and <a href="https://www.microsoft.com/en-us/research/people/xipe/">Xiulian Peng</a>
+<br><font size="3"><i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Intership, research on audio-visual speech separation</i></font> <a class="btn btn-red" href="https://arxiv.org/pdf/2207.01197.pdf">project</a></p> 
+
+<p>&nbsp; &nbsp; <a href="https://www.sensetime.com/cn"> Sensetime</a>, Autonomous driving Group, 2020.9 ~ 2021.3, supervised by <a href="https://scholar.google.com/citations?user=xB3V4xIAAAAJ&hl=zh-CN">Guohang Yan</a> and <a href="https://superkoma.github.io/">Tao Ma</a>
+<br><font size="3"><i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Intership, working on autonomous driving (sensor calibration)</i></font></p>
+
+<p>&nbsp; &nbsp; <a href="https://www.ntu.edu.sg/"> Nanyang Technological University</a>, 2020.9 ~ 2021.3, supervised by <a href="https://www.linkedin.com/in/tao-bai-00698b174/?originalSubdomain=sg">Tao Bai</a> and <a href="https://www.linkedin.com/in/wangjinjun/">Jun Zhao</a>
+<br><font size="3"><i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Intership, research on federated learning and adversarial learning</i></font> <a class="btn btn-red" href="https://link.springer.com/chapter/10.1007/978-3-030-89137-4_9">project</a></p>
+
+<p>&nbsp; &nbsp; <a href="http://www.innno.net/#/"> INNNO</a>, 2019.9 ~ 2020.2
+<br><font size="3"><i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Intership, working on land cover change detection (semantic segmentation)</i></font> <a class="btn btn-red" href="https://github.com/wxystudio/change-detection">project</a></p> 
+
+<p>&nbsp; &nbsp; <a href="http://www.xjtu.edu.cn/">Xi'an Jiaotong University</a>, 2018 ~ 2020, supervised by <a href="https://scholar.google.com/citations?user=BST50KwAAAAJ&hl=zh-CN">Jinsong Han</a> and <a href="https://scholar.google.com/citations?user=Dk7JgNcAAAAJ&hl=zh-CN">Jinjun Wang</a>
+<br><font size="3"><i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Research Assistant, research on GAN, federated learning and privacy <a class="btn btn-red" href="https://arxiv.org/abs/1911.08128">project 1</a> <a class="btn btn-red" href="./files/pubs/usenix.pdf">project 2</a></i></font></p>
 
 <h2 id="publications">Publications</h2>
+
 <h3>Journal</h3>
-	<div class="publication row clearfix">
+
+<div class="publication row clearfix">
 	<div class="row-text">
-		Learning county from pixels: Corn yield prediction with attention-weighted multiple instance learning <br/>
-		<span class="bold">Xiaoyu Wang</span>, Yuchi Ma, Qunying Huang, Zhengwei Yang, Zhou Zhang <br/>
-		<span class="italic"><a href="https://www.tandfonline.com/journals/tres20">International Journal of Remote Sensing</a> (IJRS), 2025</span><br/>
-	    <a class="btn btn-red" href="https://arxiv.org/pdf/2312.01001">pdf</a> <a class="btn btn-red" href="./files/slides/2024/CALS.pdf">poster</a> <a class="btn btn-red" href="./files/slides/2024/901_2024.pptx">slides</a> 
+		Learning county from pixels: Corn yield prediction with attention-weighted multiple instance learning <br>
+		<span class="bold">Xiaoyu Wang</span>, Yuchi Ma, Qunying Huang, Zhengwei Yang, Zhou Zhang <br>
+		<span class="italic"><a href="https://www.tandfonline.com/journals/tres20">International Journal of Remote Sensing</a> (IJRS), 2025</span><br>
+	    <a class="btn btn-red" href="https://arxiv.org/pdf/2312.01001">pdf</a> <a class="btn btn-red" href="./files/slides/2024/CALS.pdf">poster</a> <a class="btn btn-red" href="./files/slides/2024/901_2024.pptx">slides</a>
 	</div>
-  	</div>
-
-
+</div>
 
 <h3>Conferences</h3>
 
-	<div class="publication row clearfix">
+<div class="publication row clearfix">
 	<div class="row-text">
-		Knowledge-guided machine learning model with soil moisture for corn yield prediction under drought conditions <br/>
-		Zhengwei Yang, <span class="bold">Xiaoyu Wang</span>, Jingyi Huang, Zhou Zhang <br/>
-		<span class="italic"><a href="https://www.interspeech2022.org/">IGARSS 2024-2025 IEEE International Geoscience and Remote Sensing Symposium</a>  (IGARSS), 2025</span><br/>
-		<a class="btn btn-red" href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10640545">pdf</a> 
+		Knowledge-guided machine learning model with soil moisture for corn yield prediction under drought conditions <br>
+		Zhengwei Yang, <span class="bold">Xiaoyu Wang</span>, Jingyi Huang, Zhou Zhang <br>
+		<span class="italic"><a href="https://www.interspeech2022.org/">IGARSS 2024-2025 IEEE International Geoscience and Remote Sensing Symposium</a> (IGARSS), 2025</span><br>
+		<a class="btn btn-red" href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10640545">pdf</a>
 	</div>
-	</div>
-	
-  <div class="publication row clearfix">
+</div>
+
+<div class="publication row clearfix">
 	<div class="row-text">
-		County Level Crop Yield Prediction Using Smap Derived Data Products and Deep Learning Model <br/>
-		Zhengwei Yang, <span class="bold">Xiaoyu Wang</span>, Jingyi Huang, Zhou Zhang <br/>
-		<span class="italic"><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10640545">IGARSS 2023-2024 IEEE International Geoscience and Remote Sensing Symposium</a>  (IGARSS), 2024</span><br/>
+		County Level Crop Yield Prediction Using Smap Derived Data Products and Deep Learning Model <br>
+		Zhengwei Yang, <span class="bold">Xiaoyu Wang</span>, Jingyi Huang, Zhou Zhang <br>
+		<span class="italic"><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10640545">IGARSS 2023-2024 IEEE International Geoscience and Remote Sensing Symposium</a> (IGARSS), 2024</span><br>
 	    <a class="btn btn-red" href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10640545">pdf</a>
 	</div>
-  </div>
+</div>
 
-  <div class="publication row clearfix">
+<div class="publication row clearfix">
 	<div class="row-text">
-		Multi-modal multi-correlation learning for audio-visual speech separation <br/>
-		<span class="bold">Xiaoyu Wang</span>, Xiangyu Kong, Xiulian Peng, Yan Lu <br/>
-		<span class="italic"><a href="https://www.interspeech2022.org/">Conference of the International Speech Communication Association</a>  (Interspeech), 2022</span><br/>
+		Multi-modal multi-correlation learning for audio-visual speech separation <br>
+		<span class="bold">Xiaoyu Wang</span>, Xiangyu Kong, Xiulian Peng, Yan Lu <br>
+		<span class="italic"><a href="https://www.interspeech2022.org/">Conference of the International Speech Communication Association</a> (Interspeech), 2022</span><br>
 	    <a class="btn btn-red" href="https://arxiv.org/pdf/2207.01197.pdf">pdf</a>
 		<a class="btn btn-red" href="./files/pubs/2022/interspeech2022_slides.pdf">slides</a>
 		<a class="btn btn-red" href="./files/pubs/2022/interspeech2022.mp4">talk</a>
 		<a class="btn btn-red" href="./files/pubs/2022/interspeech2022_poster.pdf">poster</a>
-		<!-- <a class="btn btn-red" href="./files/restroom.mp4">restroom</a> -->
 	</div>
-  </div>
+</div>
 
-  <div class="publication row clearfix">
+<div class="publication row clearfix">
 	<div class="row-text">
-		A data-free approach for targeted universal adversarial perturbation<br/>
-		<span class="bold">Xiaoyu Wang</span>, Tao Bai, Jun Zhao<br/>
-		<span class="italic"><a href="https://scisec.org/">International Conference on Science of Cyber Security</a> (SciSec), 2021</span><br/>
-		<!-- <a class="btn btn-red" href="">arXiv</a> -->
-		<a class="btn btn-red" href="https://link.springer.com/chapter/10.1007/978-3-030-89137-4_9">pdf</a> 
+		A data-free approach for targeted universal adversarial perturbation<br>
+		<span class="bold">Xiaoyu Wang</span>, Tao Bai, Jun Zhao<br>
+		<span class="italic"><a href="https://scisec.org/">International Conference on Science of Cyber Security</a> (SciSec), 2021</span><br>
+		<a class="btn btn-red" href="https://link.springer.com/chapter/10.1007/978-3-030-89137-4_9">pdf</a>
 	</div>
-  </div>
-
-
+</div>
 
 <h3>Preprint</h3>
 
-	<div class="publication row clearfix">
+<div class="publication row clearfix">
 	<div class="row-text">
-		Knowledge-guided machine learning model with soil moisture for corn yield prediction under drought conditions <br/>
-		<span class="bold">Xiaoyu Wang</span>, Yijia Xu, Jingyi Huang, Zhengwei Yang, Zhou Zhang <br/>
-		<span class="italic"><a href="">Submitted to </a> </span><br/>
-		<a class="btn btn-red" href="https://arxiv.org/pdf/2503.16328">pdf</a> <a class="btn btn-red" href="./files/slides/2025/901_03192025.pptx">slides</a> 
+		Knowledge-guided machine learning model with soil moisture for corn yield prediction under drought conditions <br>
+		<span class="bold">Xiaoyu Wang</span>, Yijia Xu, Jingyi Huang, Zhengwei Yang, Zhou Zhang <br>
+		<span class="italic"><a href="">Submitted to </a></span><br>
+		<a class="btn btn-red" href="https://arxiv.org/pdf/2503.16328">pdf</a> <a class="btn btn-red" href="./files/slides/2025/901_03192025.pptx">slides</a>
 	</div>
-	</div>
-
-
+</div>
 
 <h2 id="teaching">Teaching experiences</h2>
-	<ul>
+
+<ul>
 	<li type="disc">2026 Fall BSE 301, Land Information Management, University of Wisconsin–Madison<br>
-		The slides designed by me: 
+		The slides designed by me:
 	</li>
 	<li type="disc">2025 Spring BSE 405, Artificial Intelligence in Agriculture, University of Wisconsin–Madison<br>
-		The experiment case study designed by me: <a class="btn btn-red" href="./files/405/1.pdf">1</a> <a class="btn btn-red" href="./files/405/2_1.pdf">2-1</a> <a class="btn btn-red" href="./files/405/2_2.pdf">2-2</a> <a class="btn btn-red" href="./files/405/3.pdf">3</a> 
+		The experiment case study designed by me: <a class="btn btn-red" href="./files/405/1.pdf">1</a> <a class="btn btn-red" href="./files/405/2_1.pdf">2-1</a> <a class="btn btn-red" href="./files/405/2_2.pdf">2-2</a> <a class="btn btn-red" href="./files/405/3.pdf">3</a>
 	</li>
-	</ul>	
-
-
+</ul>
 
 <h2 id="Grants">Grants</h2>
-	<ul>
-		<li type="disc"> BSE Travel Award of UW-Madison, 2025. ($1000)</li>
-	</ul>	
 
-
+<ul>
+	<li type="disc">BSE Travel Award of UW-Madison, 2025. ($1000)</li>
+</ul>
 
 <h2 id="awards">Awards & Honors</h2>
-	<ul>
-		<li type="disc"> Stars of Tomorrow Excellent Intern Award, Microsoft Research Asia, 2021.</li>
-		<li type="disc"> Third class award of Xi'an Jiaotong University (top 20%), 2018. </li>
-	</ul>	
 
+<ul>
+	<li type="disc">Stars of Tomorrow Excellent Intern Award, Microsoft Research Asia, 2021.</li>
+	<li type="disc">Third class award of Xi'an Jiaotong University (top 20%), 2018.</li>
+</ul>
 
+<h2 id="services">Professional Services</h2>
 
-<h2 id="services"> Professional Services</h2>
-	<h3>Journal Reviewer</h3>
-	  	<ul>
-	  		<li type="disc"> International Journal of Applied Earth Observation and Geoinformation (JAG)</li>
-		</ul>	
+<h3>Journal Reviewer</h3>
 
-
+<ul>
+	<li type="disc">International Journal of Applied Earth Observation and Geoinformation (JAG)</li>
+</ul>
 
 <h2 id="advisees">Former advisees</h2>
-	<ul>
-		<li type="disc"> <a href="https://www.linkedin.com/in/mwu929/"><u>Mingda Wu</u></a> (University of Wisconsin–Madison -> PhD, UT Austin), 2025 </li>
-	</ul>
-	
-	<ul>
-		<li type="disc"> <a href="https://www.linkedin.com/in/atticus-yang-a396b6201/"><u>Atticus Yang</u></a>  (The University of Chicago ->MS, The University of Chicago), 2024 </li>
-	</ul>	
-<hr> 
 
+<ul>
+	<li type="disc"><a href="https://www.linkedin.com/in/mwu929/"><u>Mingda Wu</u></a> (University of Wisconsin–Madison -> PhD, UT Austin), 2025</li>
+</ul>
 
+<ul>
+	<li type="disc"><a href="https://www.linkedin.com/in/atticus-yang-a396b6201/"><u>Atticus Yang</u></a> (The University of Chicago ->MS, The University of Chicago), 2024</li>
+</ul>
 
-<h2 id="hobby">Hobby</h2>
-	<ul>
-		 I enjoy weightlifting, powerlifting, and bodybuilding in my life  (<a href="hobby.html"><u>My Weightlifting gallery</u></a>)
-	</ul>	
 <hr>
 
+<h2 id="hobby">Hobby</h2>
 
+<ul>
+	I enjoy weightlifting, powerlifting, and bodybuilding in my life (<a href="hobby.html"><u>My Weightlifting gallery</u></a>)
+</ul>
 
+<hr>
+
+</div>
 </body>
 </html>

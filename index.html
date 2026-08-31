@@ -7,19 +7,33 @@
     <title>Xiaoyu Wang</title>
     <link rel="stylesheet" href="./index_files/jemdoc.css" type="text/css">
     <style>
-        a { color: #2471a3; text-decoration: none; }
-        a:hover { color: #174e74; }
+        :root {
+            --black: #202326;
+            --red: #9f3f3f;
+            --blue: #315f86;
+            --green: #477458;
+            --brown: #795746;
+            --muted: #596166;
+            --soft: #f5f6f5;
+            --line: #d2d5d4;
+        }
+        body {
+            color: var(--black);
+            font-family: Arial, "Microsoft YaHei", "Noto Sans", sans-serif;
+        }
+        a { color: var(--blue); text-decoration: none; }
+        a:hover { color: var(--red); }
         a.btn {
             display: inline-block;
             margin: 4px 3px 0 0;
             padding: 1px 5px;
             border-radius: 2px;
-            background: #2471a3;
+            background: var(--green);
             color: #fff;
             font-size: 12px;
             line-height: 1.5;
         }
-        a.btn:hover { background: #174e74; }
+        a.btn:hover { background: var(--red); color: #fff; }
         p, li { line-height: 1.5; }
         .bold { font-weight: bold; }
         .italic { font-style: italic; }
@@ -29,28 +43,49 @@
             z-index: 10;
             margin: -10px -50px 20px;
             padding: 10px 16px;
-            border-bottom: 1px solid #ddd;
-            background: #fff;
+            border-bottom: 1px solid var(--line);
+            background: var(--soft);
             text-align: center;
         }
         .topnav a {
             display: inline-block;
             margin: 0 9px;
-            color: #333;
+            color: var(--black);
             font-size: 14px;
+            font-weight: 600;
             line-height: 2;
         }
-        .topnav a:hover { color: #2471a3; }
-        h2 { scroll-margin-top: 60px; }
+        .topnav a:hover { color: var(--red); }
+        h1, h2, h3 { font-weight: 700; }
+        h1 { color: var(--black); }
+        h2 { color: var(--blue); }
+        h2 {
+            position: relative;
+            scroll-margin-top: 60px;
+            border-bottom-color: var(--line);
+        }
+        h2::after {
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 48px;
+            border-bottom: 3px solid var(--green);
+            content: "";
+        }
+        h3 { color: var(--brown); }
+        hr { border: 0; border-top: 1px solid var(--line); }
         .profile-table { width: 100%; }
         .profile-table td { vertical-align: middle; }
         .profile-photo { width: 200px; }
         .entry { margin: 0 0 18px 16px; }
         .entry-title { margin-bottom: 2px; }
-        .entry-detail { margin: 0; color: #444; }
+        .entry-detail { margin: 0; color: var(--muted); }
         .publication { margin: 0 16px 24px; }
         .publication p { margin-bottom: 3px; }
         .publication-title { font-weight: bold; }
+        .publication .italic { color: var(--muted); }
+        .publication a.btn { background: var(--blue); }
+        .publication a.btn:hover { background: var(--red); }
         .compact-list li { margin-top: 8px; }
         @media only screen and (max-width: 700px) {
             body { padding-left: 20px; padding-right: 20px; }
@@ -78,7 +113,7 @@
         <tbody>
         <tr>
             <td>
-                <h1 style="border-bottom: none; margin-bottom: 6px; color: #000;">
+                <h1 style="border-bottom: none; margin-bottom: 6px;">
                     Xiaoyu Wang
                     <span style="font-size: 0.6em; font-weight: normal;">(pronounced "shaw yoo")</span>
                 </h1>
